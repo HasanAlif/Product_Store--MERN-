@@ -6,7 +6,7 @@ dotenv.config();
 
 const app = express();
 
-app.get('/products', (req, res) => {
+app.post('/products', (req, res) => {
   res.json({ message: 'Hello from the Products!' });
 });
 
