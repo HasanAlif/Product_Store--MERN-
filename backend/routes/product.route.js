@@ -1,65 +1,14 @@
 import express from "express";
-import Product from "../models/product.model.js";
-import mongoose from "mongoose";
+import { createProduct, updateProduct, getProducts, deleteProduct } from "../controllers/product.controller.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
-  const product = req.body;
+router.post("/", createProduct );
 
-  if (!product.name || !product.price || !product.image) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
-  const newProduct = new Product(product);
+router.get("/", getProducts );
 
-  try {
-    await newProduct.save();
-    res.status(201).json({ sucess: true, data: newProduct });
-  } catch (error) {
-    res.status(500).json({ sucess: false, message: "Server Error" });
-  }
-});
+router.put("/:id",updateProduct );
 
-router.get("/", async (req, res) => {
-  try {
-    const products = await Product.find({});
-    res.status(200).json({ success: true, data: products });
-  } catch (error) {
-    res.status(500).json({ success: false, message: "Server error" });
-  }
-});
-
-router.put("/:id", async (req, res) => {
-  const { id } = req.params;
-  const product = req.body;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ message: "Product not found in database" });
-  }
-
-  try {
-    const updatedProduct = await Product.findByIdAndUpdate(id, product, {
-      new: true,
-    });
-    res.status(200).json({ success: true, data: updatedProduct });
-  } catch (error) {
-    res.status(500).json({ success: false, message: "Server error" });
-  }
-});
-
-router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const product = await Product.findById(id);
-    if (!product) {
-      return res.status(404).json({ message: "Product not found in database" });
-    }
-    await Product.findByIdAndDelete(id);
-    res.status(200).json({ message: "Product deleted successfully" });
-  } catch (error) {
-    return res.status(500).json({ message: "Server error" });
-  }
-});
+router.delete("/:id", deleteProduct );
 
 export default router;
