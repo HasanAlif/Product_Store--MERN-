@@ -9,7 +9,6 @@ function App() {
   return (
     <Box minH={"100vh"}>
       <Navbar />
-      <CreatePage />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/create" element={<CreatePage />} />
