@@ -3,12 +3,12 @@ import { createProduct, updateProduct, getProducts, deleteProduct } from "../con
 
 const router = express.Router();
 
-router.post("/", createProduct );
+router.post("/", createProduct );// Create a new product
 
-router.get("/", getProducts );
+router.get("/", getProducts );// Get all products
 
-router.put("/:id",updateProduct );
+router.put("/:id",updateProduct );// Update a product
 
-router.delete("/:id", deleteProduct );
+router.delete("/:id", deleteProduct );// Delete a product
 
 export default router;
