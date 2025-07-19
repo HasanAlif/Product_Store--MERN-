@@ -7,11 +7,11 @@ import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <Box minH={"100vh"}>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/create" element={<CreatePage />} />
+    <Box minH={"100vh"}> {/* Main container for the app */}
+      <Navbar /> {/* Navbar component for navigation */}
+      <Routes> {/* Define routes for the application */}
+        <Route path="/" element={<HomePage />} /> {/* HomePage component to display current products */}
+        <Route path="/create" element={<CreatePage />} /> {/* CreatePage component to allow users to create new products */}
       </Routes>
     </Box>
   );
